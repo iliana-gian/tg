@@ -1,0 +1,32 @@
+#include <LiquidCrystal_I2C.h> //LCD library
+ 
+ 
+ const int motionsensor = 5;
+ const int ledPin =  7;
+const int ledPin2 =  8;
+LiquidCrystal_I2C lcd(0x27, 16, 2);                                     
+
+  void setup() {
+    pinMode(ledPin, OUTPUT);
+    pinMode(ledPin2, OUTPUT);
+    pinMode(motionsensor, INPUT);
+     //LCD MONITOR
+
+lcd.begin(16,2);
+lcd.backlight();
+lcd.print(" WELCOME ");
+  }
+  void loop()
+  {
+     if (digitalRead(motionsensor) == HIGH)
+     {
+       digitalWrite(ledPin, HIGH);
+       digitalWrite(ledPin2, LOW);
+      lcd.print(" OCCUPIED ");                        //lcd print
+     }
+     else {
+       digitalWrite(ledPin, LOW);
+      digitalWrite(ledPin2, HIGH);
+      lcd.print(" FREE ");                        //lcd print
+     }
+  }
